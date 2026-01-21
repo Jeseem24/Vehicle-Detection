@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Campus Vehicle Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">🏫</div>
+                <div class="title-section">
+                    <h1>Smart Campus Vehicle Management</h1>
+                    <p class="subtitle">Real-Time Traffic Monitoring System</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator" id="connectionStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Connecting...</span>
+                </div>
+                <div class="time-display" id="currentTime">--:--:--</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel - Video Feed -->
+            <section class="video-panel">
+                <div class="panel-header">
+                    <h2>📹 Live Gate Feed</h2>
+                    <span class="live-badge">● LIVE</span>
+                </div>
+                <div class="video-container">
+                    <img id="videoFeed" src="/video_feed" alt="Live Video Feed"
+                        onerror="this.style.display='none'; document.getElementById('videoOverlay').classList.remove('hidden');"
+                        onload="document.getElementById('videoOverlay').classList.add('hidden'); this.style.display='block';">
+                    <div class="video-overlay hidden" id="videoOverlay">
+                        <div class="loading-spinner"></div>
+                        <p>Waiting for video feed...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel - Stats & Charts -->
+            <section class="stats-panel">
+                <!-- Counter Cards -->
+                <div class="counter-grid">
+                    <div class="counter-card entry">
+                        <div class="counter-icon">🟢</div>
+                        <div class="counter-info">
+                            <span class="counter-label">Total Entry</span>
+                            <span class="counter-value" id="totalIn">0</span>
+                        </div>
+                    </div>
+                    <div class="counter-card exit">
+                        <div class="counter-icon">🔴</div>
+                        <div class="counter-info">
+                            <span class="counter-label">Total Exit</span>
+                            <span class="counter-value" id="totalOut">0</span>
+                        </div>
+                    </div>
+                    <div class="counter-card campus">
+                        <div class="counter-icon">🏫</div>
+                        <div class="counter-info">
+                            <span class="counter-label">On Campus</span>
+                            <span class="counter-value" id="onCampus">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="charts-grid">
+                    <!-- Pie Chart -->
+                    <div class="chart-card">
+                        <h3>Vehicle Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+                    <!-- Bar Chart -->
+                    <div class="chart-card">
+                        <h3>Entry vs Exit by Type</h3>
+                        <div class="chart-container">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Log -->
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <h3>📋 Recent Activity</h3>
+                        <button class="reset-btn" id="resetBtn">Reset Counts</button>
+                    </div>
+                    <div class="activity-log" id="activityLog">
+                        <div class="activity-empty">No activity yet</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Smart Campus Vehicle Management System © 2026 | Powered by AI Vision</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
