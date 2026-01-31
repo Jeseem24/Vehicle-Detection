@@ -18,13 +18,6 @@ Open `frontend/index.html` in your browser.
 
 ---
 
-## Hardware Optimization
-- Optimized for AMD RX 6500M GPU using DirectML
-- Fallback to CPU if GPU not available
-
-## Project Structure
-```
-VD2/
 ├── backend/          # Python detection & tracking
 ├── frontend/         # Web dashboard
 ├── logs/             # CSV vehicle logs
